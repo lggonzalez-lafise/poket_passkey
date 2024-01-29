@@ -17,6 +17,7 @@
     "amazon-cognito-passwordless-auth": "^0.12.1",
     "expo": "~50.0.4",
     "expo-build-properties": "^0.11.0",
+    "expo-dev-client": "^3.3.7",
     "expo-device": "^5.9.3",
     "expo-linking": "^6.2.2",
     "expo-splash-screen": "^0.26.4",

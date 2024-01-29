@@ -1,22 +1,8 @@
-/**
- * Copyright Amazon.com, Inc. and its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
 import {
     usePasswordless,
     useLocalUserCache,
     useAwaitableState
-} from "amazon-cognito-passwordless-auth/react";
+} from "../client/react-native";
 
 import { useEffect, useState } from "react";
 import {
@@ -79,7 +65,7 @@ const StepUpAuth = () => {
 
     return (
         <View style={styles.stepUpAuthMain}>
-            <View style={styles.stepUpAuthContainer}>
+            <View>
                 <Text style={styles.stepUpAuthTitle}>Step up Authentication</Text>
                 <View>
                     <Text>Enter a Consent ID. You can make one up,</Text>
@@ -89,12 +75,8 @@ const StepUpAuth = () => {
                     <View style={styles.row}>
                         <Text>Also see:</Text>
                         <TouchableOpacity
-                            onPress={() =>
-                                Linking.openURL(
-                                    "https://github.com/aws-samples/amazon-cognito-passwordless-auth/blob/main/SMS-OTP-STEPUP.md#step-up-authentication-with-sms-one-time-password"
-                                )
-                            }
-                        >
+                            onPress={() => Linking.openURL("https://github.com/aws-samples/amazon-cognito-passwordless-auth/blob/main/SMS-OTP-STEPUP.md#step-up-authentication-with-sms-one-time-password")
+                        }>
                             <Text style={styles.link}>
                                 "explanation of the step up procedure"
                             </Text>
@@ -103,11 +85,10 @@ const StepUpAuth = () => {
                 </View>
                 <TextInput
                     style={styles.input}
-                    type={"text"}
                     placeholder={"Consent ID"}
                     value={consentId}
                     onChangeText={(e) => setConsentId(e)}
-                    disabled={busy}
+                    //disabled={busy}
                     autoFocus
                 />
                 <Text>
@@ -116,8 +97,7 @@ const StepUpAuth = () => {
                 <View style={styles.stepUpAuthButtons}>
                     <Button
                         style={styles.stepUpAuthButton}
-                        title={
-                            !fido2Credentials?.length
+                        title={!fido2Credentials?.length
                                 ? "To use WebAuthn, first add face or touch unlock"
                                 : undefined
                         }
@@ -130,16 +110,11 @@ const StepUpAuth = () => {
                                     clientMetadata: { consent_id: consentId },
                                 })
                             )
-                        }
-                    >
-                        <Text
-                            style={[
-                                Styles.buttonText,
-                                !fido2Credentials?.length || !consentId || busy
-                                    ? Styles.buttonTextDisabled
-                                    : null,
-                            ]}
-                        >
+                        }>
+                        <Text style={[
+                            Styles.buttonText,
+                            !fido2Credentials?.length || !consentId || busy ? Styles.buttonTextDisabled : null,]
+                        }>
                             WebAuthn
                         </Text>
                     </Button>
@@ -178,25 +153,25 @@ const StepUpAuth = () => {
                     <>
                         <Text>Enter the OTP code we've sent to {smsOtpPhoneNumber}:</Text>
                         <View
-                            style={styles.otpForm}
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                setIsWrongSmsOtp(false);
-                                resolveSmsOtp();
-                            }}
+                            // style={styles.otpForm}
+                            // onSubmit={(e) => {
+                            //     e.preventDefault();
+                            //     setIsWrongSmsOtp(false);
+                            //     resolveSmsOtp();
+                            // }}
                         >
                             <TextInput
                                 id="sms-otp"
-                                type="text"
+                                //type="text"
                                 inputMode="numeric"
-                                pattern="[0-9]{6}"
+                                //pattern="[0-9]{6}"
                                 autoComplete="one-time-code"
                                 placeholder="OTP code"
                                 autoFocus
-                                title="OTP Code: should be 6 numbers"
+                                //title="OTP Code: should be 6 numbers"
                                 value={smsOtp}
                                 onChangeText={(e) => setSmsOtp(e)}
-                                disabled={!!awaitedSmsOtp && !isWrongSmsOtp}
+                                //disabled={!!awaitedSmsOtp && !isWrongSmsOtp}
                                 maxLength={6}
                             />
                             <Button
