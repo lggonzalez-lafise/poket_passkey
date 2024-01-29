@@ -32,7 +32,7 @@ import {
   MinimalTextDecoder,
 } from "../config";
 import { retrieveTokens } from "../storage";
-import { Passwordless as Component } from "./components";
+import { PasswordlessComponent } from "./components";
 
 export * from "./components";
 export {
@@ -163,16 +163,12 @@ export function configure(config?: ReactNativeConfig) {
   return _configure(config);
 }
 
-export const Passwordless = { configure, Component };
+export const Passwordless = { configure, PasswordlessComponent };
 export const toBase64String = (base64Url: string) =>
   base64Url.replace(/-/g, "+").replace(/_/g, "/") + "==";
 export const toBase64 = (input: string) =>
   Buffer.from(input, "utf-8").toString("base64");
-export async function fido2CreateCredential({
-  friendlyName,
-}: {
-  friendlyName: string | (() => string | Promise<string>);
-}) {
+export async function fido2CreateCredential({friendlyName,}: { friendlyName: string | (() => string | Promise<string>)}) {
   const config = configure();
   const response = await fido2StartCreateCredential();
   if (!config.fido2) throw new Error("FIDO2 not configured");
@@ -211,9 +207,7 @@ export async function _fido2getCredential(
   };
 }
 
-export function credentialGetter(
-  ...args: Parameters<typeof fido2getCredential>
-) {
+export function credentialGetter( ...args: Parameters<typeof fido2getCredential> ) {
   if (!Passkey.isSupported()) {
     throw new Error("Passkey not supported on this device");
   }
