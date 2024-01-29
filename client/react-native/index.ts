@@ -146,9 +146,7 @@ export function configure(config?: ReactNativeConfig) {
     };
   }
   if (config && !config.location && !config.fido2) {
-    throw new Error(
-      "You must provide a minimal location config or fido2 passkeyDomain"
-    );
+    throw new Error("You must provide a minimal location config or fido2 passkeyDomain");
   } else if (config) {
     config.location = reactNativeMinimalLocation;
     config.location.href = config.fido2?.passkeyDomain

@@ -4,6 +4,7 @@ import React from "react";
 import {Fido2Toast, Passwordless, PasswordlessContextProvider} from "./client/react";
 import {StatusBar} from "expo-status-bar";
 import {PasswordlessComponent} from "./client/react-native";
+import {LoginScreen} from "./src/Login";
 
 const App = () => {
     return (
@@ -15,16 +16,15 @@ const App = () => {
                 customerLogoUrl:
                     "",
             }}>
-            <View style={styles.container}>
-                <Text>Open up App.tsx to start working on your app!</Text>
-                <StatusBar style="auto" />
-            </View>
+            {/*<View style={styles.container}>*/}
+            {/*    <Text>Open up App.tsx to start working on your app!</Text>*/}
+            {/*    <StatusBar style="auto" />*/}
+            {/*</View>*/}
+            <LoginScreen />
         </PasswordlessComponent>
         <Fido2Toast />
         <StatusBar style="dark" />
     </PasswordlessContextProvider>
-
-
     );
 };
 
