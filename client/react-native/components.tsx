@@ -9,36 +9,15 @@ import {
 } from "react-native";
 import * as Device from "expo-device";
 import { Passkey } from "react-native-passkey";
-import { Styles as _Styles, Palette as _Palette } from "./styles";
+import { Styles as _Styles } from "./styles";
 import { useLocalUserCache } from "../react";
 import { SvgXml } from "react-native-svg";
 import { configure, usePasswordless } from "./index";
+import {ButtonProps, CustomBrand} from "../types/Props";
 
 export const Styles = _Styles;
-export const Palette = _Palette;
 
-interface CustomBrand {
-  backgroundImageUrl?: string;
-  customerName?: string;
-  customerLogoUrl?: string;
-}
-
-interface Styles {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
-
-interface ButtonProps {
-  children: React.ReactNode;
-  onPress?: () => void | Promise<void>;
-  onClick?: () => void | Promise<void>;
-  outlined?: boolean;
-  disabled?: boolean;
-  link?: boolean;
-  style?: Styles;
-}
-
-export function Button({ children, ...props }: ButtonProps) {
+const Button = ({ children, ...props }: ButtonProps) => {
   return (
     <TouchableOpacity
       {...props}
@@ -50,8 +29,7 @@ export function Button({ children, ...props }: ButtonProps) {
         props.outlined && props.disabled ? Styles.outlinedDisabled : null,
         props.link ? Styles.linkButton : null,
         props.style,
-      ]}
-    >
+      ]}>
       {children}
     </TouchableOpacity>
   );
@@ -84,7 +62,7 @@ const FlexContainer = (props: { children: React.ReactNode; brand: CustomBrand}) 
   );
 };
 
-export function PasswordlessComponent({brand, children,}: { brand: CustomBrand; children: React.ReactNode}) {
+const PasswordlessComponent = ({brand, children,}: { brand: CustomBrand; children: React.ReactNode}) => {
 
     const {
       requestSignInLink,
@@ -184,6 +162,7 @@ export function PasswordlessComponent({brand, children,}: { brand: CustomBrand; 
   if (signInStatus === "SIGNED_IN" && tokens) return <>{children}</>;
 
   const lastUser = lastSignedInUsers.at(0);
+
   const user: typeof lastUser = newUsername && showSignInOptionsForUser === "NEW_USER" ? {
           email: newUsername,
           username: newUsername,                                  // Presume the user might want to use FIDO2:
@@ -417,13 +396,13 @@ const Fido2Recommendation = () => {
 
 const AuthenticatorsManager = () => {
 
-    const {
-    fido2CreateCredential,
-    fido2Credentials,
-    showAuthenticatorManager,
-    toggleShowAuthenticatorManager,
-    signInStatus,
-  } = usePasswordless();
+   const {
+     fido2CreateCredential,
+     fido2Credentials,
+     showAuthenticatorManager,
+     toggleShowAuthenticatorManager,
+     signInStatus,
+   } = usePasswordless();
 
   const { updateFidoPreference } = useLocalUserCache();
   const [error, setError] = useState<Error>();
@@ -699,11 +678,17 @@ const AuthenticatorsManager = () => {
   );
 }
 
-export function Fido2Toast() {
+const Fido2Toast = () => {
   return (
     <>
       <Fido2Recommendation />
       <AuthenticatorsManager />
     </>
   );
+}
+
+export {
+    PasswordlessComponent,
+    Fido2Toast,
+    Button
 }

@@ -32,7 +32,6 @@ import {
   MinimalTextDecoder,
 } from "../config";
 import { retrieveTokens } from "../storage";
-import { PasswordlessComponent } from "./components";
 
 export * from "./components";
 export {
@@ -55,10 +54,7 @@ export {
 } from "../cognito-api";
 export { authenticateWithPlaintextPassword } from "../plaintext";
 import { parseJwtPayload } from "../util";
-import {
-  usePasswordless as _usePasswordless,
-  PasswordlessContextProvider,
-} from "../react/hooks";
+import {usePasswordless as _usePasswordless, PasswordlessContextProvider} from "../react/hooks";
 export { useLocalUserCache, useAwaitableState } from "../react/hooks";
 export { PasswordlessContextProvider };
 interface PasskeyConfig {
@@ -83,6 +79,7 @@ export type ReactNativeConfigWithDefaults = ConfigWithDefaults & {
   fido2: { passkeyDomain: string; rp: { id: string; name: string } };
 };
 export function usePasswordless() {
+
   const hooks = _usePasswordless();
   const { reCheck } = hooks;
   const url = Linking.useURL() as string;
@@ -161,7 +158,7 @@ export function configure(config?: ReactNativeConfig) {
   return _configure(config);
 }
 
-export const Passwordless = { configure, PasswordlessComponent };
+export const Passwordless = { configure };
 export const toBase64String = (base64Url: string) =>
   base64Url.replace(/-/g, "+").replace(/_/g, "/") + "==";
 export const toBase64 = (input: string) =>

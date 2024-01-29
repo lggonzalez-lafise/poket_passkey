@@ -44,9 +44,7 @@ import React, {
   useRef,
 } from "react";
 
-const PasswordlessContext = React.createContext<UsePasswordless | undefined>(
-  undefined
-);
+const PasswordlessContext = React.createContext<UsePasswordless | undefined>(undefined);
 
 /** React hook that provides convenient access to the Passwordless lib's features */
 export function usePasswordless() {
