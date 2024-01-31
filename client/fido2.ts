@@ -493,7 +493,7 @@ export function authenticateWithFido2({
       session: string;
     try {
       if (username) {
-        debug?.(`Invoking initiateAuth ...`);
+        debug?.(`/ initiateAuth ...`);
         const initAuthResponse = await initiateAuth({
           authflow: "CUSTOM_AUTH",
           authParameters: {

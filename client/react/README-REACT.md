@@ -75,7 +75,7 @@ You should wrap your own in app in this component (as child). The component will
 
 ```jsx
 <Passwordless>
-  <App />
+  <Index />
 </Passwordless>
 ```
 
@@ -148,7 +148,7 @@ npm install amazon-cognito-passwordless-auth
 A great way to learn how to use this library is to look at how we use it ourselves in the end-to-end example: [end-to-end-example/client](../../end-to-end-example/client)
 
 - In [main.tsx](../../end-to-end-example/client/src/main.tsx) we configure the library and wrap our own app with the `PasswordlesContextProvider` as well as with the `Passwordless` component. Also we add the `<Fido2Toast />` container, to display the [FIDO2 "toast"](#fido2toast--component).
-- In [App.tsx](../../end-to-end-example/client/src/App.tsx) we use the `usePasswordless` hook to understand the user's sign-in status, provide a button to sign out, and toggle show/hide the authenticators manager (part of the [FIDO2 "toast"](#fido2toast--component)).
+- In [index.tsx](../../end-to-end-example/client/src/App.tsx) we use the `usePasswordless` hook to understand the user's sign-in status, provide a button to sign out, and toggle show/hide the authenticators manager (part of the [FIDO2 "toast"](#fido2toast--component)).
 - In [StepUpAuth.tsx](../../end-to-end-example/client/src/StepUpAuth.tsx) we show how to execute SMS OTP Step Up Authentication.
 
 #### Configuration
@@ -206,7 +206,7 @@ import { PasswordlessContextProvider } from "amazon-cognito-passwordless-auth/re
 ReactDOM.createRoot(document.getElementById("root")).render(
   <PasswordlessContextProvider>
     <React.StrictMode>
-      <App />
+      <Index />
     </React.StrictMode>
   </PasswordlessContextProvider>
 );
@@ -233,7 +233,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
     >
       <React.StrictMode>
-        <App />
+        <Index />
       </React.StrictMode>
     </PasswordlessComponent>
   </PasswordlessContextProvider>
@@ -268,7 +268,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
     >
       <React.StrictMode>
-        <App />
+        <Index />
       </React.StrictMode>
     </PasswordlessComponent>
     <Fido2Toast />

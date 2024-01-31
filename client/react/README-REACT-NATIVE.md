@@ -49,8 +49,8 @@ To use it in iOS you need to setup your associated domain and serve the config J
 
 ##### Setting Up the associated domain
 
-1. Open your project's XCode Workspace by navigating to the root folder of your React Native App and run `open ./ios/YOUR_APP_NAME.xcworkspace`
-2. Select your target App and navigate to `Signing & Capabilities` tab
+1. Open your project's XCode Workspace by navigating to the root folder of your React Native Index and run `open ./ios/YOUR_APP_NAME.xcworkspace`
+2. Select your target Index and navigate to `Signing & Capabilities` tab
 3. Scroll down until you find the `Associated Domains` section and click the button `+` to add one
 4. Type `webcredentials:` followed by your naked domain (e.g.: `webcredentials:example.com`)
 
@@ -86,7 +86,7 @@ For example if your team ID is `H123456789` and your bundle `com.example.app`, y
 
 #### 5. Usage
 
-To use the library, you need to first import, wrap your app with the PasswordlesContextProvider and configure it, usually in your main App.js.
+To use the library, you need to first import, wrap your app with the PasswordlesContextProvider and configure it, usually in your main Index.js.
 
 ##### Configuration
 
@@ -97,7 +97,7 @@ import {
   Passwordless,
 } from "amazon-cognito-passwordless-auth"; // In React Native: import from top-level module
 
-function App() {
+function Index() {
   Passwordless.configure({
     cognitoIdpEndpoint: "eu-west-1", // you can also use the full endpoint URL, potentially to use a proxy
     clientId: "<client id>",
@@ -130,13 +130,13 @@ function App() {
     },
     storage: AsyncStorage, // Need to set this for React Native, as the default (localStorage) will not work
   });
-  // Your original App here
+  // Your original Index here
 }
 
 export default function AppWrapped() {
   return (
     <PasswordlessContextProvider>
-      <App />
+      <Index />
     </PasswordlessContextProvider>
   );
 }

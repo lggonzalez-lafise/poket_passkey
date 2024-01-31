@@ -96,18 +96,7 @@ export interface Config {
 }
 
 export type ConfigWithDefaults = Config &
-  Required<
-    Pick<
-      Config,
-      | "storage"
-      | "crypto"
-      | "fetch"
-      | "location"
-      | "history"
-      | "URL"
-      | "TextDecoder"
-    >
-  >;
+  Required<Pick<Config, | "storage" | "crypto" | "fetch" | "location" | "history" | "URL" | "TextDecoder">>;
 
 let config_: ConfigWithDefaults | undefined = undefined;
 export function configure(config?: Config) {
@@ -139,38 +128,22 @@ export interface CustomStorage {
   removeItem: (key: string) => void | Promise<void>;
 }
 
-export function configureFromAmplify(
-  amplifyConfig: AmplifyAuthConfig | AmplifyConfig
-) {
-  const { region, userPoolId, userPoolWebClientId } = isAmplifyConfig(
-    amplifyConfig
-  )
+export function configureFromAmplify( amplifyConfig: AmplifyAuthConfig | AmplifyConfig ) {
+  const { region, userPoolId, userPoolWebClientId } = isAmplifyConfig(amplifyConfig)
     ? amplifyConfig.Auth
     : amplifyConfig;
   if (typeof region !== "string") {
-    throw new Error(
-      "Invalid Amplify configuration provided: invalid or missing region"
-    );
+    throw new Error("Invalid Amplify configuration provided: invalid or missing region");
   }
   if (typeof userPoolId !== "string") {
-    throw new Error(
-      "Invalid Amplify configuration provided: invalid or missing userPoolId"
-    );
+    throw new Error("Invalid Amplify configuration provided: invalid or missing userPoolId");
   }
   if (typeof userPoolWebClientId !== "string") {
-    throw new Error(
-      "Invalid Amplify configuration provided: invalid or missing userPoolWebClientId"
-    );
+    throw new Error("Invalid Amplify configuration provided: invalid or missing userPoolWebClientId");
   }
-  configure({
-    cognitoIdpEndpoint: region,
-    userPoolId,
-    clientId: userPoolWebClientId,
-  });
+  configure({cognitoIdpEndpoint: region, userPoolId, clientId: userPoolWebClientId});
   return {
-    with: (
-      config: Omit<Config, "cognitoIdpEndpoint" | "userPoolId" | "clientId">
-    ) => {
+    with: ( config: Omit<Config, "cognitoIdpEndpoint" | "userPoolId" | "clientId"> ) => {
       return configure({
         cognitoIdpEndpoint: region,
         userPoolId,
