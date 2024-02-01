@@ -150,10 +150,7 @@ export async function fido2StartCreateCredential() {
   if (!idToken) {
     throw new Error("No JWT to invoke Fido2 API with");
   }
-  return fetch(
-    getFullFido2Url(
-      `register-authenticator/start?rpId=${fido2.rp?.id ?? location.hostname}`
-    ),
+  return fetch(getFullFido2Url(`register-authenticator/start?rpId=${fido2.rp?.id ?? location.hostname}`),
     {
       method: "POST",
       headers: {
@@ -179,12 +176,7 @@ export async function fido2CompleteCreateCredential({
   if (!idToken) {
     throw new Error("No JWT to invoke Fido2 API with");
   }
-  const parsedCredential =
-    "response" in credential
-      ? await parseAuthenticatorAttestationResponse(
-          credential.response as AuthenticatorAttestationResponseWithOptionalMembers
-        )
-      : credential;
+  const parsedCredential = "response" in credential ? await parseAuthenticatorAttestationResponse(credential.response as AuthenticatorAttestationResponseWithOptionalMembers) : credential;
 
   return fetch(getFullFido2Url("register-authenticator/complete"), {
     body: JSON.stringify({

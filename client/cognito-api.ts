@@ -409,10 +409,7 @@ export async function updateUserAttributes({
 }) {
   const { fetch, cognitoIdpEndpoint, proxyApiHeaders } = configure();
   const tokens = await retrieveTokens();
-  await fetch(
-    cognitoIdpEndpoint.match(AWS_REGION_REGEXP)
-      ? `https://cognito-idp.${cognitoIdpEndpoint}.amazonaws.com/`
-      : cognitoIdpEndpoint,
+  await fetch(cognitoIdpEndpoint.match(AWS_REGION_REGEXP) ? `https://cognito-idp.${cognitoIdpEndpoint}.amazonaws.com/` : cognitoIdpEndpoint,
     {
       headers: {
         "x-amz-target":

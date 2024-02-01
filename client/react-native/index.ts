@@ -102,8 +102,7 @@ export function usePasswordless() {
       credentials?: { id: string; transports?: AuthenticatorTransport[] }[];
       clientMetadata?: Record<string, string>;
       credentialGetter?: typeof fido2getCredential;
-    }) =>
-      hooks.authenticateWithFido2({
+    }) => hooks.authenticateWithFido2({
         ...args,
         credentialGetter: credentialGetter,
       }),

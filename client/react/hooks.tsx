@@ -82,16 +82,13 @@ export const PasswordlessContextProvider = (props: {
         <LocalUserCacheContextProvider>
           {props.children}
         </LocalUserCacheContextProvider>
-      ) : (
-        props.children
-      )}
+      ) : (props.children)
+      }
     </PasswordlessContext.Provider>
   );
 };
 
-const LocalUserCacheContextProvider = (props: {
-  children: React.ReactNode;
-}) => {
+const LocalUserCacheContextProvider = (props: { children: React.ReactNode}) => {
   return (
     <LocalUserCacheContext.Provider value={_useLocalUserCache()}>
       {props.children}
@@ -112,9 +109,7 @@ type Fido2Credential = StoredCredential & {
 type UsePasswordless = ReturnType<typeof _usePasswordless>;
 
 function _usePasswordless() {
-  const [signingInStatus, setSigninInStatus] = useState<BusyState | IdleState>(
-    "CHECKING_FOR_SIGNIN_LINK"
-  );
+  const [signingInStatus, setSigninInStatus] = useState<BusyState | IdleState>("CHECKING_FOR_SIGNIN_LINK");
   const [
     initiallyRetrievingTokensFromStorage,
     setInitiallyRetrievingTokensFromStorage,
